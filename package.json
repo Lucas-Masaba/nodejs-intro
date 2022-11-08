@@ -1,0 +1,22 @@
+{
+  "name": "nodejs-intro",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lucas-Masaba/nodejs-intro.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Lucas-Masaba/nodejs-intro/issues"
+  },
+  "homepage": "https://github.com/Lucas-Masaba/nodejs-intro#readme",
+  "dependencies": {
+    "validator": "^13.7.0"
+  }
+}
