@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -17,6 +18,8 @@
   },
   "homepage": "https://github.com/Lucas-Masaba/nodejs-intro#readme",
   "dependencies": {
-    "validator": "^13.7.0"
+    "chalk": "^5.1.2",
+    "validator": "^13.7.0",
+    "yargs": "^17.6.2"
   }
 }
