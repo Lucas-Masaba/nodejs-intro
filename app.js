@@ -17,18 +17,28 @@ console.log(process.argv[2])
 
 
 yargs(hideBin(process.argv))
-  .command(
-    'add',
-    'Add new note.',
-    () => {
+  .command({
+    'command': 'add',
+    'description': 'Add new note.',
+    handler: () => {
       console.log('Adding a new note...');
     },
-  //   (argv) => {
-  //     if (argv.title) {
-  //       console.info(`Added note: ${argv.title} - ${argv.body}`);
-  //     }
-  //   }
-  // )
+    'builder': {
+      'title': {
+        'alias': 't',
+        'describe': 'Enter title of the note',
+        'demandOption': true,
+        'type': 'sting',
+      },
+      'body': {
+        'alias': 'b',
+        'describe': 'Enter the content for the note',
+        'demandOption': true,
+        'type': 'sting',
+      },
+    },
+  })
+  /* The problem with using .option for this case is that it provides the options for add generally for all add, remove, list and read when node app.js --help is run*/
   // .option('title', {
   //   alias: 't',
   //   type: 'string',
@@ -41,12 +51,20 @@ yargs(hideBin(process.argv))
   //   description: 'Note content.',
   //   demandOption: true,
   // })
-  )
+  // another way to enter a command
   .command({
-    // another way to enter a command
     'command': 'remove',
     'describe': 'Command to remove note',
-    handler: function(){
+    /*Using the builder internally gets you the options for remove only when you enter node app.js remove --help*/
+    'builder': {
+      'id': {
+        'alias': 'i',
+        'describe': 'Enter id of the note',
+        'demandOption': true,
+        'type': 'number',
+      },
+    },
+    handler:  () => {
       console.log("Removing Note")
     }
   })
@@ -55,7 +73,7 @@ yargs(hideBin(process.argv))
     'List notes',
     () => {
       console.log('Listing notes')
-    }
+    },
   )
   .command(
     'read',
