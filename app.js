@@ -5,7 +5,7 @@ import yargs from 'yargs'
 // Note: hideBin is a shorthand for process.argv.slice(2)
 
 import { hideBin } from 'yargs/helpers'
-import { getNotes } from './notes.js'
+import { getNotes, addNote, removeNote } from './notes.js'
 const msg = getNotes()
 console.log(msg)
 
@@ -20,22 +20,23 @@ yargs(hideBin(process.argv))
   .command({
     'command': 'add',
     'description': 'Add new note.',
-    handler: () => {
-      console.log('Adding a new note...');
-    },
     'builder': {
       'title': {
         'alias': 't',
         'describe': 'Enter title of the note',
         'demandOption': true,
-        'type': 'sting',
+        'type': 'string',
       },
       'body': {
         'alias': 'b',
         'describe': 'Enter the content for the note',
         'demandOption': true,
-        'type': 'sting',
+        'type': 'string',
       },
+    },
+    handler: (argv) => {
+      addNote(argv.title, argv.body)
+
     },
   })
   /* The problem with using .option for this case is that it provides the options for add generally for all add, remove, list and read when node app.js --help is run*/
@@ -57,15 +58,15 @@ yargs(hideBin(process.argv))
     'describe': 'Command to remove note',
     /*Using the builder internally gets you the options for remove only when you enter node app.js remove --help*/
     'builder': {
-      'id': {
-        'alias': 'i',
-        'describe': 'Enter id of the note',
+      'title': {
+        'alias': 't',
+        'describe': 'Enter the title of the note',
         'demandOption': true,
-        'type': 'number',
+        'type': 'string',
       },
     },
-    handler:  () => {
-      console.log("Removing Note")
+    handler:  (argv) => {
+      removeNote(argv.title)
     }
   })
   .command(
